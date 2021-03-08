@@ -2,17 +2,23 @@ package it.unicam.cs.pa.jlife104936.view;
 
 import it.unicam.cs.pa.jlife104936.controller.Controller;
 import it.unicam.cs.pa.jlife104936.model.Cell;
+import it.unicam.cs.pa.jlife104936.model.IView;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 
 import java.io.File;
 
-public class ViewFx {
+public class ViewFx implements IView {
 
     protected Controller controller;
+    private Timeline timeline;
     private final FileChooser fileChooser = new FileChooser();
 
     public void setController(Controller controller) {
@@ -20,9 +26,20 @@ public class ViewFx {
     }
 
     @FXML
+    protected Button buttonPlay;
+
+    @FXML
+    private Button buttonStop;
+
+    @FXML
     private GridPane gridPane;
 
 
+    public void initialize() {
+        buttonStop.setDisable(true);
+    }
+
+    @Override
     public void initGrid() {
         int rows = controller.getBoard().getRows();
         int cols = controller.getBoard().getCols();
@@ -45,6 +62,7 @@ public class ViewFx {
         square.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             cell.setStatus(!cell.isAlive());
             setSquareStyle(square, cell);
+            System.out.println(controller.getBoard().getCell(row,col));
         });
 
         setSquareStyle(square, cell);
@@ -59,15 +77,42 @@ public class ViewFx {
         }
     }
 
+    private void startTimeline() {
+        timeline = new Timeline(
+                new KeyFrame(Duration.millis(500), event -> {
+                    controller.applyRules();
+                    initGrid();
+                })
+        );
+
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
     @FXML
     private void handlePlay() {
-        controller.applyRules();
-        initGrid();
+        startTimeline();
+        buttonPlay.setDisable(true);
+        buttonStop.setDisable(false);
+    }
+
+    @FXML
+    private void handleStop() {
+        timeline.stop();
+        buttonStop.setDisable(true);
+        buttonPlay.setDisable(false);
     }
 
     @FXML
     private void handleClear() {
         controller.clearBoard();
+        initGrid();
+    }
+
+    @FXML
+    private void handleSpaceship(){
+        controller.clearBoard();
+        controller.loadSpaceship();
         initGrid();
     }
 

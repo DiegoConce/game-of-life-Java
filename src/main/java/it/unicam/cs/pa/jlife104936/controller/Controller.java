@@ -1,21 +1,22 @@
 package it.unicam.cs.pa.jlife104936.controller;
 
-import it.unicam.cs.pa.jlife104936.model.Board;
-import it.unicam.cs.pa.jlife104936.model.FileManager;
-import it.unicam.cs.pa.jlife104936.model.Rules;
+import it.unicam.cs.pa.jlife104936.model.*;
 
 import java.io.File;
 import java.util.Random;
 
-public class Controller {
+public class Controller implements IController {
     private Board board;
     private Rules rules = new Rules();
     private final FileManager fileManager = new FileManager();
+    BoardPatterns patterns = new BoardPatterns();
 
     public Controller() {
-        this.board = new Board(10, 10);
+        this.board = new Board(30, 15);
+        patterns.setBoard(board);
     }
 
+    @Override
     public Board getBoard() {
         return board;
     }
@@ -31,6 +32,7 @@ public class Controller {
         this.board = rules.apply2Rules();
     }
 
+    @Override
     public void clearBoard() {
         for (int i = 0; i < getBoard().getRows(); i++) {
             for (int j = 0; j < getBoard().getCols(); j++) {
@@ -39,6 +41,7 @@ public class Controller {
         }
     }
 
+    @Override
     public void randomBoard() {
         Random rnd = new Random();
 
@@ -49,11 +52,17 @@ public class Controller {
         }
     }
 
+    @Override
     public void saveBoard(File file) {
         fileManager.save(getBoard(), file);
     }
 
+    @Override
     public void loadBoard(File file) {
         this.board = (Board) fileManager.load(file);
+    }
+
+    public void loadSpaceship() {
+        patterns.spaceShip();
     }
 }

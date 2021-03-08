@@ -25,6 +25,7 @@ public class Board implements Campo{
 
     @Override
     public Cell getCell(int rows, int cols) {
+        System.out.println("posizione: riga " + cols + " col " + rows);
         return this.cells[fixedRow(rows)][fixedCol(cols)];
     }
 
