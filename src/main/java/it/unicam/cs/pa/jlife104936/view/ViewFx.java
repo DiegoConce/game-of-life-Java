@@ -6,9 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+
+import java.io.File;
 
 public class ViewFx {
-    private Controller controller;
+
+    protected Controller controller;
+    private final FileChooser fileChooser = new FileChooser();
 
     public void setController(Controller controller) {
         this.controller = controller;
@@ -17,11 +22,6 @@ public class ViewFx {
     @FXML
     private GridPane gridPane;
 
-    public void initButtons() {
-        Buttons buttons = new Buttons();
-        buttons.setController(controller);
-        buttons.print();
-    }
 
     public void initGrid() {
         int rows = controller.getBoard().getRows();
@@ -59,4 +59,46 @@ public class ViewFx {
         }
     }
 
+    @FXML
+    private void handlePlay() {
+        controller.applyRules();
+        initGrid();
+    }
+
+    @FXML
+    private void handleClear() {
+        controller.clearBoard();
+        initGrid();
+    }
+
+    @FXML
+    private void handleRandom() {
+        controller.randomBoard();
+        initGrid();
+    }
+
+    @FXML
+    private void handleSave() {
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("JSON files", "*.json");
+        fileChooser.setTitle("Save a game");
+        fileChooser.getExtensionFilters().add(filter);
+        File saveFile = fileChooser.showSaveDialog(null);
+
+        if (saveFile != null) {
+            controller.saveBoard(saveFile);
+        }
+    }
+
+    @FXML
+    private void handleLoad() {
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("JSON files", "*.json");
+        fileChooser.setTitle("Load a game");
+        fileChooser.getExtensionFilters().add(filter);
+        File openFile = fileChooser.showOpenDialog(null);
+
+        if (openFile != null) {
+            controller.loadBoard(openFile);
+            initGrid();
+        }
+    }
 }

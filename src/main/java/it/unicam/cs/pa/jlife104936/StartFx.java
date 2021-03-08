@@ -21,7 +21,6 @@ public class StartFx extends Application {
         controller.init();
         view = loader.getController();
         view.setController(controller);
-        view.initButtons();
         view.initGrid();
 
         primaryStage.setTitle("jlife");

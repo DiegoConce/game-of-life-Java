@@ -6,7 +6,7 @@ plugins {
 
 javafx{
     modules = ['javafx.controls' , 'javafx.fxml']
-    version = '14'
+    version = '15.0.1'
 }
 
 group 'org.example'
