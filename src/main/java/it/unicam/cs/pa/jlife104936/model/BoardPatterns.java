@@ -1,16 +1,13 @@
 package it.unicam.cs.pa.jlife104936.model;
 
-public class BoardPatterns {
+public class BoardPatterns implements Patterns {
     Board board;
 
     public void setBoard(Board board) {
         this.board = board;
     }
 
-    public Board getBoard() {
-        return board;
-    }
-
+    @Override
     public Board spaceShip() {
         board.getCell(13, 6).setStatus(true);
         board.getCell(13, 7).setStatus(true);
@@ -26,15 +23,18 @@ public class BoardPatterns {
         return board;
     }
 
-    public void pentomio() {
+    @Override
+    public Board pentomio() {
         board.getCell(12, 7).setStatus(true);
         board.getCell(13, 7).setStatus(true);
         board.getCell(14, 7).setStatus(true);
         board.getCell(15, 7).setStatus(true);
         board.getCell(16, 7).setStatus(true);
+        return board;
     }
 
-    public void toad() {
+    @Override
+    public Board toad() {
         board.getCell(13, 8).setStatus(true);
         board.getCell(14, 8).setStatus(true);
         board.getCell(15, 8).setStatus(true);
@@ -42,5 +42,6 @@ public class BoardPatterns {
         board.getCell(14, 7).setStatus(true);
         board.getCell(15, 7).setStatus(true);
         board.getCell(16, 7).setStatus(true);
+        return board;
     }
 }

@@ -14,16 +14,4 @@ public class Cell implements Cellula {
         this.status = newStatus;
     }
 
-    @Override
-    public String toString() {
-        String a;
-        if (status) {
-            a = "1";
-        } else {
-            a = "0";
-        }
-
-
-        return a;
-    }
 }

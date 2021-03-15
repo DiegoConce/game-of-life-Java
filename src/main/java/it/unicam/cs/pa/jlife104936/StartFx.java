@@ -18,7 +18,7 @@ public class StartFx extends Application {
         loader.setLocation(getClass().getResource("/View.fxml"));
         AnchorPane root = loader.load();
 
-        controller.init();
+        controller.randomBoard();
         view = loader.getController();
         view.setController(controller);
         view.initGrid();

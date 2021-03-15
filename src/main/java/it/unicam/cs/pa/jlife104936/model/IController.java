@@ -15,4 +15,10 @@ public interface IController {
     void saveBoard(File file);
 
     void loadBoard(File file);
+
+    void loadSpaceship();
+
+    void loadPentomio();
+
+    void loadToad();
 }

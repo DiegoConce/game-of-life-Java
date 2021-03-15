@@ -62,7 +62,6 @@ public class ViewFx implements IView {
         square.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             cell.setStatus(!cell.isAlive());
             setSquareStyle(square, cell);
-            System.out.println(controller.getBoard().getCell(row, col));
         });
 
         setSquareStyle(square, cell);

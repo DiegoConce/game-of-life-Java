@@ -26,7 +26,6 @@ public class Board implements Campo {
 
     @Override
     public Cell getCell(int rows, int cols) {
-         System.out.println("posizione: riga " + cols + " col " + rows);
         return this.cells[fixedRow(rows)][fixedCol(cols)];
     }
 
@@ -53,24 +52,4 @@ public class Board implements Campo {
         return (col + getCols()) % getCols();
     }
 
-
-
-    @Override
-    public String toString() {
-
-        StringBuilder a = new StringBuilder();
-
-        for (int i = 0; i < cols; i++) {
-            for (int j = 0; j < rows; j++) {
-                a.append(cells[i][j] + " ");
-            }
-            a.append("\n");
-        }
-
-        return "Board{" +
-                "rows=" + rows +
-                ", cols=" + cols +
-                ", cells=\n" + a +
-                '}';
-    }
 }

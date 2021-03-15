@@ -13,18 +13,11 @@ public class Controller implements IController {
 
     public Controller() {
         this.board = new Board(30, 15); //30 15
-        patterns.setBoard(board);
     }
 
     @Override
     public Board getBoard() {
         return board;
-    }
-
-    public void init() {
-        //board.getCell(0, 0).setStatus(true);
-       // board.getCell(1, 0).setStatus(true);
-       // board.getCell(2, 0).setStatus(true);
     }
 
     @Override
@@ -63,20 +56,24 @@ public class Controller implements IController {
         this.board = (Board) fileManager.load(file);
     }
 
+    @Override
     public void loadSpaceship() {
         clearBoard();
+        patterns.setBoard(board);
         this.board = patterns.spaceShip();
     }
 
+    @Override
     public void loadPentomio() {
         clearBoard();
-        patterns.pentomio();
-        this.board = patterns.getBoard();
+        patterns.setBoard(board);
+        this.board = patterns.pentomio();
     }
 
+    @Override
     public void loadToad() {
         clearBoard();
-        patterns.toad();
-        this.board = patterns.getBoard();
+        patterns.setBoard(board);
+        this.board = patterns.toad();
     }
 }

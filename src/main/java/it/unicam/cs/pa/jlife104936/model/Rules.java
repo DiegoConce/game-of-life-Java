@@ -14,16 +14,14 @@ public class Rules implements Regola {
     @Override
     public Cellula applyRules(int numOfNeighbours, Cellula cell) {
         Cell newCell = new Cell();
-        if (cell.isAlive() && numOfNeighbours < 2) {
+
+        if (cell.isAlive() && numOfNeighbours < 2)
             newCell.setStatus(false);
-        }
-        if (cell.isAlive() && numOfNeighbours > 3) {
+        else if (cell.isAlive() && numOfNeighbours > 3)
             newCell.setStatus(false);
-        }
-        if (cell.isAlive() && numOfNeighbours == 2 || numOfNeighbours == 3) {
+        else if (cell.isAlive() && numOfNeighbours == 2 || numOfNeighbours == 3)
             newCell.setStatus(true);
-        }
-        
+
         return newCell;
     }
 
@@ -34,7 +32,7 @@ public class Rules implements Regola {
                 Cell cell = board.getCell(i, j);
                 int numOfNeighbours = countAliveNeightbours(i, j);
 
-                nextBoard.setCell(i,j, applyRules(numOfNeighbours,cell));
+                nextBoard.setCell(i, j, applyRules(numOfNeighbours, cell));
             }
         }
         return nextBoard;
