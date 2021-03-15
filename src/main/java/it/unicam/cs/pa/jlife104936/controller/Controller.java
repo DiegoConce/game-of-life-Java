@@ -12,7 +12,7 @@ public class Controller implements IController {
     BoardPatterns patterns = new BoardPatterns();
 
     public Controller() {
-        this.board = new Board(30, 15);
+        this.board = new Board(30, 15); //30 15
         patterns.setBoard(board);
     }
 
@@ -22,14 +22,14 @@ public class Controller implements IController {
     }
 
     public void init() {
-        board.getCell(0, 0).setStatus(true);
-        board.getCell(1, 0).setStatus(true);
-        board.getCell(2, 0).setStatus(true);
+        //board.getCell(0, 0).setStatus(true);
+       // board.getCell(1, 0).setStatus(true);
+       // board.getCell(2, 0).setStatus(true);
     }
 
     public void applyRules() {
         rules.setBoard(this.board);
-        this.board = rules.apply2Rules();
+        this.board = rules.nextGen();
     }
 
     @Override
@@ -63,6 +63,19 @@ public class Controller implements IController {
     }
 
     public void loadSpaceship() {
-        patterns.spaceShip();
+        clearBoard();
+        this.board = patterns.spaceShip();
+    }
+
+    public void loadPentomio() {
+        clearBoard();
+        patterns.pentomio();
+        this.board = patterns.getBoard();
+    }
+
+    public void loadToad() {
+        clearBoard();
+        patterns.toad();
+        this.board = patterns.getBoard();
     }
 }

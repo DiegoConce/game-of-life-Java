@@ -1,7 +1,9 @@
 package it.unicam.cs.pa.jlife104936.model;
 
 
-public class Board implements Campo{
+import java.util.Arrays;
+
+public class Board implements Campo {
     private int rows;
     private int cols;
     private Cell[][] cells;
@@ -25,8 +27,13 @@ public class Board implements Campo{
 
     @Override
     public Cell getCell(int rows, int cols) {
-        System.out.println("posizione: riga " + cols + " col " + rows);
+         System.out.println("posizione: riga " + cols + " col " + rows);
         return this.cells[fixedRow(rows)][fixedCol(cols)];
+    }
+
+    @Override
+    public void setCell(int rows, int cols, Cellula cell) {
+        this.cells[fixedRow(rows)][fixedCol(cols)] = (Cell) cell;
     }
 
     @Override
@@ -46,6 +53,8 @@ public class Board implements Campo{
     private int fixedCol(int col) {
         return (col + getCols()) % getCols();
     }
+
+
 
     @Override
     public String toString() {

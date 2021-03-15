@@ -12,30 +12,35 @@ public class Rules implements Regola {
     }
 
     @Override
-    public void applyRules() {
-
+    public Cellula applyRules(int numOfNeighbours, Cellula cell) {
+        Cell newCell = new Cell();
+        if (cell.isAlive() && numOfNeighbours < 2) {
+            newCell.setStatus(false);
+        }
+        if (cell.isAlive() && numOfNeighbours > 3) {
+            newCell.setStatus(false);
+        }
+        if (cell.isAlive() && numOfNeighbours == 2 || numOfNeighbours == 3) {
+            newCell.setStatus(true);
+        }
+        
+        return newCell;
     }
 
-    public Board apply2Rules() {
+    public Board nextGen() {
         Board nextBoard = new Board(board.getRows(), board.getCols());
         for (int i = 0; i < board.getRows(); i++) {
             for (int j = 0; j < board.getCols(); j++) {
                 Cell cell = board.getCell(i, j);
-
                 int numOfNeighbours = countAliveNeightbours(i, j);
 
-                if (cell.isAlive() && numOfNeighbours < 2)
-                    nextBoard.getCell(i, j).setStatus(false);
-                else if (cell.isAlive() && numOfNeighbours > 3)
-                    nextBoard.getCell(i, j).setStatus(false);
-                else if (cell.isAlive() && numOfNeighbours == 2 || numOfNeighbours == 3)
-                    nextBoard.getCell(i, j).setStatus(true);
+                nextBoard.setCell(i,j, applyRules(numOfNeighbours,cell));
             }
         }
         return nextBoard;
     }
 
-    public int countAliveNeightbours(int row, int col) {
+    private int countAliveNeightbours(int row, int col) {
         int count = 0;
         for (Cell cell : getVicini(row, col)) {
             if (cell.isAlive())
@@ -44,7 +49,7 @@ public class Rules implements Regola {
         return count;
     }
 
-    public List<Cell> getVicini(int row, int col) {
+    private List<Cell> getVicini(int row, int col) {
         int nord = row - 1;
         int est = col + 1;
         int sud = row + 1;

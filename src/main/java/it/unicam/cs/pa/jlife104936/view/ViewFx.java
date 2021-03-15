@@ -62,7 +62,7 @@ public class ViewFx implements IView {
         square.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             cell.setStatus(!cell.isAlive());
             setSquareStyle(square, cell);
-            System.out.println(controller.getBoard().getCell(row,col));
+            System.out.println(controller.getBoard().getCell(row, col));
         });
 
         setSquareStyle(square, cell);
@@ -104,21 +104,14 @@ public class ViewFx implements IView {
     }
 
     @FXML
-    private void handleClear() {
-        controller.clearBoard();
-        initGrid();
-    }
-
-    @FXML
-    private void handleSpaceship(){
-        controller.clearBoard();
-        controller.loadSpaceship();
-        initGrid();
-    }
-
-    @FXML
     private void handleRandom() {
         controller.randomBoard();
+        initGrid();
+    }
+
+    @FXML
+    private void handleClear() {
+        controller.clearBoard();
         initGrid();
     }
 
@@ -145,5 +138,23 @@ public class ViewFx implements IView {
             controller.loadBoard(openFile);
             initGrid();
         }
+    }
+
+    @FXML
+    private void handleSpaceship() {
+        controller.loadSpaceship();
+        initGrid();
+    }
+
+    @FXML
+    private void handlePentomio() {
+        controller.loadPentomio();
+        initGrid();
+    }
+
+    @FXML
+    private void handleToad() {
+        controller.loadToad();
+        initGrid();
     }
 }

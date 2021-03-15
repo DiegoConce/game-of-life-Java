@@ -6,6 +6,8 @@ public interface Campo {
 
     Cellula getCell(int rows, int cols);
 
+    void setCell(int rows, int cols, Cellula cell);
+
     int getRows();
 
     int getCols();

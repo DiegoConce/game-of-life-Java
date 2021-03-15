@@ -25,6 +25,7 @@ public class StartFx extends Application {
 
         primaryStage.setTitle("jlife");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

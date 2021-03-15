@@ -59,11 +59,11 @@
          <HBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </HBox.margin></Button>
-      <Button mnemonicParsing="false" text="Button">
+      <Button mnemonicParsing="false" onAction="#handlePentomio" text="Pentomio">
          <HBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </HBox.margin></Button>
-      <Button mnemonicParsing="false" text="Button">
+      <Button mnemonicParsing="false" onAction="#handleToad" text="Toad">
          <HBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </HBox.margin></Button>
