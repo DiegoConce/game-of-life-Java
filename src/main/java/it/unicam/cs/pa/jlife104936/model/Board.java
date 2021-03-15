@@ -1,7 +1,6 @@
 package it.unicam.cs.pa.jlife104936.model;
 
 
-import java.util.Arrays;
 
 public class Board implements Campo {
     private int rows;

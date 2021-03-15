@@ -9,26 +9,14 @@ class ControllerTest {
     Controller ctrTest = new Controller();
 
     @Test
-    void getBoard() {
-    }
-
-    @Test
-    void applyRules() {
-    }
-
-    @Test
     void clearBoard() {
+        ctrTest.clearBoard();
+
+        for (int i = 0; i < ctrTest.getBoard().getRows(); i++) {
+            for (int j = 0; j < ctrTest.getBoard().getCols(); j++) {
+                assertFalse(ctrTest.getBoard().getCell(i,j).isAlive());
+            }
+        }
     }
 
-    @Test
-    void randomBoard() {
-    }
-
-    @Test
-    void saveBoard() {
-    }
-
-    @Test
-    void loadBoard() {
-    }
 }

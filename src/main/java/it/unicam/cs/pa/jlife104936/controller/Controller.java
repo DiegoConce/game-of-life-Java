@@ -27,6 +27,7 @@ public class Controller implements IController {
        // board.getCell(2, 0).setStatus(true);
     }
 
+    @Override
     public void applyRules() {
         rules.setBoard(this.board);
         this.board = rules.nextGen();

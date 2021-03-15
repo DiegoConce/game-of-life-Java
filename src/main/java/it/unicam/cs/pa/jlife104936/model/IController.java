@@ -6,6 +6,8 @@ public interface IController {
 
     Campo getBoard();
 
+    void applyRules();
+
     void clearBoard();
 
     void randomBoard();
