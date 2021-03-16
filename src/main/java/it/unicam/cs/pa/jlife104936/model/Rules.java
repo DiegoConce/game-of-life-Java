@@ -3,16 +3,16 @@ package it.unicam.cs.pa.jlife104936.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rules implements Regola {
+public class Rules implements IRules {
 
     private Board board;
 
-    public void setBoard(Board board) {
-        this.board = board;
+    @Override
+    public void setBoard(Campo board) {
+        this.board = (Board) board;
     }
 
-    @Override
-    public Cellula applyRules(int numOfNeighbours, Cellula cell) {
+    Regola rule = (int numOfNeighbours, Cellula cell) -> {
         Cell newCell = new Cell();
 
         if (cell.isAlive() && numOfNeighbours < 2)
@@ -23,7 +23,8 @@ public class Rules implements Regola {
             newCell.setStatus(true);
 
         return newCell;
-    }
+    };
+
 
     public Board nextGen() {
         Board nextBoard = new Board(board.getRows(), board.getCols());
@@ -32,7 +33,7 @@ public class Rules implements Regola {
                 Cell cell = board.getCell(i, j);
                 int numOfNeighbours = countAliveNeightbours(i, j);
 
-                nextBoard.setCell(i, j, applyRules(numOfNeighbours, cell));
+                nextBoard.setCell(i, j, rule.applyRules(numOfNeighbours, cell));
             }
         }
         return nextBoard;
